@@ -27,7 +27,7 @@ provider "digitalocean" {
 }
 
 resource "digitalocean_droplet" "demos" {
-  name = "${var.name} ${random_id.id.hex}"
+  name = "${var.name}-${random_id.id.hex}"
   image = "docker-18-04"
   size = "8gb"
   region = "nyc1"
@@ -35,10 +35,6 @@ resource "digitalocean_droplet" "demos" {
     "${var.ssh_fingerprint}"
   ]
   
-  output "public_ip" {
-    value = "${digitalocean_droplet.demos.ipv4_address}"
-  }
-
   provisioner "remote-exec" {
     inline = [
       "sudo apt update",
@@ -56,8 +52,10 @@ resource "digitalocean_droplet" "demos" {
     }
   }
 
-  # provisioner "local-exec" {
-  #   command = "ansible-playbook -i ${digitalocean_droplet.demos.ipv4_address}, --private-key ${file(var.pvt_key)} grimoirelab_deploy.yml"
-  # }
-
+  provisioner "local-exec" {
+    command = "ansible-playbook -i ${digitalocean_droplet.demos.ipv4_address}, --private-key ${var.pvt_key} deploy.yml"
+  }
+}
+output "public_ip" {
+  value = "${digitalocean_droplet.demos.ipv4_address}"
 }

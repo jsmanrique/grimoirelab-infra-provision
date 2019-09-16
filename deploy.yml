@@ -1,0 +1,7 @@
+---
+- name: Setting up connection
+  hosts: all
+  remote_user: root
+  tasks:
+    - name: Hello World
+      shell: echo "Hello World"
