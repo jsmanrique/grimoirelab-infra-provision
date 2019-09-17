@@ -1,0 +1,8 @@
+{
+  "grimoirelab": {
+    "meta": {
+      "title": "GrimoireLab"
+    },
+    "git": ["https://github.com/chaoss/grimoirelab.git"]
+  }
+}
