@@ -1,0 +1,33 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+    - name: Set down running containers
+      command: docker-compose down
+      args:
+        chdir: /root/grimoirelab-for-demos
+      register: output-down
+    - debug:
+        var: output-down
+
+    - name: Upload new settings
+      copy:
+        src: "grimoirelab-settings/{{ item }}"
+        dest: /root/grimoirelab-for-demos/grimoirelab-settings/
+      with_items:
+        - setup.cfg
+        - projects.json
+
+    # - name: Restart containers
+    #   docker_service:
+    #     project_src: grimoirelab-for-demos
+    #     state: present
+    #     restarted: true
+    - name: Restart containers
+      command: docker-compose up -d
+      args:
+        chdir: /root/grimoirelab-for-demos
+      register: output-up
+    
+    - debug:
+        var: output-up
