@@ -42,8 +42,8 @@ resource "digitalocean_droplet" "demos" {
       "sudo apt-get -y install python-minimal",
       "sudo sysctl -w vm.max_map_count=262144",
       # "git clone https://gitlab.com/Bitergia/lab/analytics-demo.git",
-      "git clone --recurse-submodules https://gitlab.com/jsmanrique/grimoirelab-with-opendistro.git",
-      "cd grimoirelab-with-opendistro",
+      "git clone --recurse-submodules https://gitlab.com/jsmanrique/grimoirelab-for-demos.git",
+      "cd grimoirelab-for-demos",
       "docker-compose up -d"
     ]
 
@@ -51,7 +51,8 @@ resource "digitalocean_droplet" "demos" {
       host = "${digitalocean_droplet.demos.ipv4_address}"
       type = "ssh"
       user = "root"
-      timeout = "2m"
+      timeout = "5m"
+      agent = true
     }
   }
 
