@@ -1,0 +1,5 @@
+grimoirelab_repo: "https://gitlab.com/jsmanrique/grimoirelab-for-demos"
+src_settings_path: "../grimoirelab-settings/"
+dest_settings_path: "./grimoirelab-settings"
+update_orgs: true
+update_settings: true

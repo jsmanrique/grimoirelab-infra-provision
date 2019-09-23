@@ -1,0 +1,16 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+        
+    - import_tasks: upload-settings.yml
+    - import_tasks: update-organizations.yml
+    
+    - name: Restart containers
+      command: docker-compose restart
+      args:
+        chdir: /root/{{ grimoirelab_repo.split("/")[-1] }}
+      register: output
+    
+    - debug:
+        var: output

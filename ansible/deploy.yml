@@ -1,0 +1,28 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+    # - name: Set sysctl
+    #   command: sysctl -w vm.max_map_count=262144
+
+    - name: Clone GrimoireLab repo
+      git:
+        repo: "{{ grimoirelab_repo }}"
+        dest: /root/{{ grimoirelab_repo.split("/")[-1] }}
+        track_submodules: true
+    
+    - name: Set down running GrimoireLab containers
+      command: docker-compose down
+      args:
+        chdir: /root/{{ grimoirelab_repo.split("/")[-1] }}
+
+    - import_tasks: upload-settings.yml
+
+    - name: Start GrimoireLab containers
+      command: docker-compose up -d
+      args:
+        chdir: /root/{{ grimoirelab_repo.split("/")[-1] }}
+      register: output
+    
+    - debug:
+        var: output

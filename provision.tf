@@ -41,10 +41,6 @@ resource "digitalocean_droplet" "demos" {
       "sudo apt update",
       "sudo apt-get -y install python-minimal",
       "sudo sysctl -w vm.max_map_count=262144",
-      # "git clone https://gitlab.com/Bitergia/lab/analytics-demo.git",
-      "git clone --recurse-submodules https://gitlab.com/jsmanrique/grimoirelab-for-demos.git",
-      "cd grimoirelab-for-demos",
-      "docker-compose up -d"
     ]
 
     connection {
@@ -60,6 +56,7 @@ resource "digitalocean_droplet" "demos" {
   #   command = "ansible-playbook -i ${digitalocean_droplet.demos.ipv4_address}, --private-key ${var.pvt_key} deploy.yml"
   # }
 }
+
 output "public_ip" {
   value = "${digitalocean_droplet.demos.ipv4_address}"
 }

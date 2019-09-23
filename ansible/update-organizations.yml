@@ -1,0 +1,5 @@
+- name: Update organizations.json file
+  command: git submodule update --recursive
+  args:
+    chdir: /root/{{ grimoirelab_repo.split("/")[-1] }}
+  when: update_orgs
