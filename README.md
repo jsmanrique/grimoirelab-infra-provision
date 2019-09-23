@@ -16,7 +16,7 @@ cd ansible
 ansible-playbook -i <IP>, deploy.yml
 ```
 
-More details, in the following sections ;-)
+More details, in the following sections. Let's have fun!
 
 ## Requirements
 
@@ -26,7 +26,7 @@ More details, in the following sections ;-)
 or whatever mechanisms they provide. By now, this project has support for:
   * Digital Ocean
 
-# Setting up your cloud provider account
+# Step 1: Setting up your cloud provider account
 
 ## Digital Ocean
 
@@ -36,11 +36,11 @@ Things you need to do:
 * [Create a Digital Ocean Personal Token](https://www.digitalocean.com/docs/api/create-personal-access-token/)
 * Get your [SSH fingerprint](https://en.wikipedia.org/wiki/Public_key_fingerprint): `ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub`
 
-## <OTHER>
+## Others ...
 
 Feel free to submit merge requests for it ;-)
 
-# Setting your local environment and 1st deployment
+# Step 2: Setting your local environment and getting remote machinery ready
 
 Let's go for the steps needed to start playing with this project:
 
@@ -80,7 +80,7 @@ Outputs:
 public_ip = 157.245.85.159
 ```
 
-# Deploy GrimoireLab in your cloud infrastructure
+# Step 3: Deploy and manage GrimoireLab in your cloud infrastructure
 
 We already have a machine ready *somewhere*. Let's say *somewhere* is the `public_ip`
 noted by Terraform. Now it's time to set up our GrimoireLab software environment.
