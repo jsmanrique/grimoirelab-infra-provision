@@ -245,6 +245,14 @@ cd ansible
 ansible-playbook -i <PUBLIC_IP>, update.yml
 ```
 
+## Customize your GrimoireLab deployment
+
+By default, this project is using the `docker-compose.yml` file described
+in this [side project](https://gitlab.com/jsmanrique/grimoirelab-for-demos). If
+you want to try other deployment configurations, you might need to edit vars listed
+in [ansible/group_vars/all/main.yml](ansible/group_vars/all/main.yml), or manage
+the extra vars through the command line.
+
 # License
 
 GPLv3
