@@ -36,6 +36,10 @@ Things you need to do:
 * [Create a Digital Ocean Personal Token](https://www.digitalocean.com/docs/api/create-personal-access-token/)
 * Get your [SSH fingerprint](https://en.wikipedia.org/wiki/Public_key_fingerprint): `ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub`
 
+## <OTHER>
+
+Feel free to submit merge requests for it ;-)
+
 # Setting your local environment and 1st deployment
 
 Let's go for the steps needed to start playing with this project:
