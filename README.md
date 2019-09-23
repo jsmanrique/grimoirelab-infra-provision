@@ -206,8 +206,8 @@ PLAY RECAP *********************************************************************
 ```
 
 Once ready, your GrimoireLab infra would be ready in:
-* Dasboard: `http://<PUBLIC_IP>:5601`
-* HatStall: `http://<PUBLIC_IP>:8000`
+* Dashboard: `http://<PUBLIC_IP>:5601`
+* HatStall (the identities and affilition management web interface): `http://<PUBLIC_IP>:8000`
 
 ## Update GrimoireLab settings
 
