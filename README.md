@@ -25,62 +25,17 @@ More details, in the following sections. Let's have fun!
 * An account set up in one cloud provider, including SSH access, access tokens, 
 or whatever mechanisms they provide. By now, this project has support for:
   * Digital Ocean
+  * Google Cloud Platform (Work in Progress)
 
-# Step 1: Setting up your cloud provider account
+# Step 1: Clone the repository and set up your cloud provider account
 
-## Digital Ocean
+Clone it into your laptop / machine. I've only tested it in Linux, so I cannot promise it'll work the same in MacOS or MS Windows. It will create a folder called `grimoirelab-infra-provision`.
 
-We will be working with this thing Digital Ocean call [Droplets](https://www.digitalocean.com/products/droplets/).
-Things you need to do:
-* [Add your SSH key to your account](https://www.digitalocean.com/docs/droplets/how-to/add-ssh-keys/)
-* [Create a Digital Ocean Personal Token](https://www.digitalocean.com/docs/api/create-personal-access-token/)
-* Get your [SSH fingerprint](https://en.wikipedia.org/wiki/Public_key_fingerprint): `ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub`
+Setup your working environment based on your cloud provider:
+* [Digital Ocean](do/README.md)
+* [Google Cloud Platform](gcp/README.md)
 
-## Others ...
-
-Feel free to submit merge requests for it ;-)
-
-# Step 2: Setting your local environment and getting remote machinery ready
-
-Let's go for the steps needed to start playing with this project:
-
-1. Clone it into your laptop / machine. I've only tested it in Linux, so I cannot promise it'll work the same in MacOS or MS Windows. It will create a folder called `grimoirelab-infra-provision`.
-
-2. Inside `grimoirelab-infra-provision` create a file called `terraform.tfvars` with the following format and content:
-```
-do_token = "<DIGITAL_OCEAN_PERSONAL_TOKEN>"
-ssh_fingerprint = "<YOUR_SSH_FINGERPRINT>"
-```
-
-3. Initialize Terraform:
-```
-terraform init
-```
-
-4. Let's create your first droplet. It will read both your `terraform.tfvars` and `provision.tf` files.
-```
-terraform apply -var name=<GIVE_IT_A_NAME>
-```
-
-During the process, Terraform might ask for confirmation to apply the changes you
-have requested. If you want to say `yes` to everything, just run:
-```
-terraform apply -auto-approve -var name=<GIVE_IT_A_NAME>
-```
-
-At the end of the process, Terraform outputs the public IP to access to the
-machine you have created. Something like:
-```
-digitalocean_droplet.demos: Creation complete after 2m2s [id=160048525]
-
-Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
-
-Outputs:
-
-public_ip = 157.245.85.159
-```
-
-# Step 3: Deploy and manage GrimoireLab in your cloud infrastructure
+# Step 2: Deploy and manage GrimoireLab in your cloud infrastructure
 
 We already have a machine ready *somewhere*. Let's say *somewhere* is the `public_ip`
 noted by Terraform. Now it's time to set up our GrimoireLab software environment.
