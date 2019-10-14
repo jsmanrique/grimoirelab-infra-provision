@@ -3,6 +3,7 @@
 Things you need to do:
 * [Create a Google Cloud Platform project](https://cloud.google.com/resource-manager/docs/creating-managing-projects), and take note of its ID.
 * [Download your credentials .json file into `grimoirelab-infra-provision/gcp`](https://cloud.google.com/docs/authentication/end-user#creating_your_client_credentials)
+* [Add your SSH key to your account](https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys)
 
 # Setting your local environment and getting remote machinery ready
 
@@ -11,7 +12,7 @@ Things you need to do:
 cd grimoirelab-infra-provision/gcp
 ```
 
-2. Inside `grimoirelab-infra-provision/do` create a file called `terraform.tfvars` with the following format and content:
+2. Inside `grimoirelab-infra-provision/gcp` create a file called `terraform.tfvars` with the following format and content:
 ```
 gcp_credentials_file = "<GCP_CREDENTIALS_FILE>.json"
 gcp_project_name = "<GCP_PROJECT_ID>"
@@ -36,9 +37,7 @@ terraform apply -auto-approve -var name=<GIVE_IT_A_NAME>
 At the end of the process, Terraform outputs the public IP to access to the
 machine you have created. Something like:
 ```
-digitalocean_droplet.demos: Creation complete after 2m2s [id=160048525]
-
-Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+Apply complete! Resources: 6 added, 0 changed, 0 destroyed.
 
 Outputs:
 
