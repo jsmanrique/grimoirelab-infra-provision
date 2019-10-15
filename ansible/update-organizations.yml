@@ -1,5 +1,5 @@
 - name: Update organizations.json file
   command: git submodule update --recursive --remote
   args:
-    chdir: /root/{{ grimoirelab_repo.split("/")[-1] }}
+    chdir: /{{user if (user == "root") else ["home",user]|join("/")}}/{{ grimoirelab_repo.split("/")[-1] }}
   when: update_orgs

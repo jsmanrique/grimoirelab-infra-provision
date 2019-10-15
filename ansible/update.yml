@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  remote_user: root
+  remote_user: "{{ remote_user }}"
   tasks:
         
     - import_tasks: upload-settings.yml
@@ -9,8 +9,16 @@
     - name: Restart containers
       command: docker-compose restart
       args:
-        chdir: /root/{{ grimoirelab_repo.split("/")[-1] }}
+        chdir: /{{remote_user if (remote_user == "root") else ["home",remote_user]|join("/")}}/{{ grimoirelab_repo.split("/")[-1] }}
       register: output
+      when: not gcp_cos
+    
+    - name: Restart containers
+      command: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:$PWD" -w="$PWD" docker/compose:1.24.1 restart
+      args:
+        chdir: /{{remote_user if (remote_user == "root") else ["home",remote_user]|join("/")}}/{{ grimoirelab_repo.split("/")[-1] }}
+      register: output
+      when: gcp_cos
     
     - debug:
         var: output

@@ -93,11 +93,7 @@ resource "google_compute_instance" "demo" {
      }
  }
 
-#  metadata_startup_script = <<SCRIPT
-#  echo alias docker-compose="'"'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:$PWD" -w="$PWD" docker/compose:1.24.1'"'" >> ~/.bashrc
-#  source ~/.bashrc
-#  SCRIPT
-  metadata_startup_script = "sudo sysctl -w vm.max_map_count=262144"
+ metadata_startup_script = "sudo sysctl -w vm.max_map_count=262144"
 
 }
 

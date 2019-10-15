@@ -25,7 +25,7 @@ More details, in the following sections. Let's have fun!
 * An account set up in one cloud provider, including SSH access, access tokens, 
 or whatever mechanisms they provide. By now, this project has support for:
   * Digital Ocean
-  * Google Cloud Platform (Work in Progress)
+  * Google Cloud Platform
 
 # Step 1: Clone the repository and set up your cloud provider account
 
@@ -44,16 +44,28 @@ First of all, we need to get settings files ready for the deployment. By default
 there are in [grimoirelab-settings](grimoirelab-settings). Edit them to fit with
 your needs.
 
-**Important**: Don't forget to fill `api_token` fields with your token, or API Key, in
+**IMPORTANT**: Don't forget to fill `api_token` fields with your token, or API Key, in
 `setup.cfg` if you plan to gather data from GitHub, GitLab, or Meetup, for example.
 
 Once ready, execute `deploy.yml` playbook over the `public_ip`:
+* If your cloud infrastructure expects a `root` user and it's not a Google Cloud Virtual Machine Containers Optimized, then:
 ```
 cd ansible
 ansible-playbook -i <PUBLIC_IP>, deploy.yml
 ```
+* If your cloud infrastructure expects a `<USERNAME>` user and it's not a Google Cloud Virtual Machine Containers Optimized, then:
+```
+cd ansible
+ansible-playbook -i <PUBLIC_IP>, deploy.yml -e "user=<USERNAME>"
+```
+* If your cloud infrastructure is a Google Cloud Containers Optimized Virtual Mahcine, it expects a `<USERNAME>` user, then:
+```
+cd ansible
+ansible-playbook -i <PUBLIC_IP>, deploy.yml -e "user=<USERNAME> gcp_cos=true"
+```
 
-**Important**: Don't forget the comma (`,`) after the `<PUBLIC_IP>`!
+**IMPORTANT**: Don't forget the comma (`,`) after the `<PUBLIC_IP>`!
+
 
 During the process, Ansible might ask for permission to continue connecting.
 Just say `yes`:
@@ -180,6 +192,8 @@ cd ansible
 ansible-playbook -i <PUBLIC_IP>, update.yml -e "update_orgs=false"
 ```
 
+**IMPORTANT**: Remember to add `user=<USERNAME>` or `gcp_cos=true` if needed to the `-e` parameter
+
 ### Update organizations
 
 By default, I am using the `organizations.json` file hosted in 
@@ -191,6 +205,8 @@ cd ansible
 ansible-playbook -i <PUBLIC_IP>, update.yml -e "update_settings=false"
 ```
 
+**IMPORTANT**: Remember to add `user=<USERNAME>` or `gcp_cos=true` if needed to the `-e` parameter
+
 ### Update all the settings
 
 Basically, you need to execute previous actions (edit files, and submit merge 
@@ -199,6 +215,8 @@ request) and to execute:
 cd ansible
 ansible-playbook -i <PUBLIC_IP>, update.yml
 ```
+
+**IMPORTANT**: Remember to add `user=<USERNAME>` or `gcp_cos=true` if needed to the `-e` parameter
 
 ## Customize your GrimoireLab deployment
 

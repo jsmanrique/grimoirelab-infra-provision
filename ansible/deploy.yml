@@ -1,28 +1,45 @@
 ---
 - hosts: all
-  remote_user: root
+  remote_user: "{{ user }}"
+  vars:
+    dest_path: /{{user if (user == "root") else ["home",user]|join("/")}}/{{ grimoirelab_repo.split("/")[-1] }} 
   tasks:
-    # - name: Set sysctl
-    #   command: sysctl -w vm.max_map_count=262144
+    - name: Set sysctl
+      command: sudo sysctl -w vm.max_map_count=262144
 
     - name: Clone GrimoireLab repo
       git:
         repo: "{{ grimoirelab_repo }}"
-        dest: /root/{{ grimoirelab_repo.split("/")[-1] }}
+        dest: "{{ dest_path }}"
         track_submodules: true
     
     - name: Set down running GrimoireLab containers
       command: docker-compose down
       args:
-        chdir: /root/{{ grimoirelab_repo.split("/")[-1] }}
+        chdir: "{{ dest_path }}"
+      when: not gcp_cos
+    
+    - name: Set down GrimoireLab containers in GCP Containers Optimized instance
+      command: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v {{ dest_path }}:{{ dest_path }} -w={{ dest_path }} docker/compose:1.24.1 down
+      args:
+        chdir: "{{ dest_path }}"
+      when: gcp_cos
 
     - import_tasks: upload-settings.yml
 
     - name: Start GrimoireLab containers
       command: docker-compose up -d
       args:
-        chdir: /root/{{ grimoirelab_repo.split("/")[-1] }}
+        chdir: "{{ dest_path }}"
       register: output
+      when: not gcp_cos
+    
+    - name: Start GrimoireLab containers in GCP Containers Optimized instance
+      command: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v {{ dest_path }}:{{ dest_path }} -w={{ dest_path }} docker/compose:1.24.1 up -d
+      args:
+        chdir: "{{ dest_path }}"
+      register: output
+      when: gcp_cos
     
     - debug:
         var: output
