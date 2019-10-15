@@ -4,4 +4,5 @@ dest_settings_path: "./grimoirelab-settings"
 update_orgs: true
 update_settings: true
 user: root
+dest_path: /{{user if (user == "root") else ["home",user]|join("/")}}/{{ grimoirelab_repo.split("/")[-1] }}
 gcp_cos: false

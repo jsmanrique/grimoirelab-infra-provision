@@ -1,7 +1,7 @@
 - name: Upload new GrimoireLab settings
   copy: 
     src: "{{ src_settings_path }}/{{ item }}"
-    dest: /{{user if (user == "root") else ["home",user]|join("/")}}/{{ grimoirelab_repo.split("/")[-1] }}/{{ dest_settings_path }}
+    dest: "{{ dest_path }}"
   with_items:
     - setup.cfg
     - projects.json

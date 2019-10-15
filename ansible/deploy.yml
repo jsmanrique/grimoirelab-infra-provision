@@ -1,8 +1,6 @@
 ---
 - hosts: all
-  remote_user: "{{ user }}"
-  vars:
-    dest_path: /{{user if (user == "root") else ["home",user]|join("/")}}/{{ grimoirelab_repo.split("/")[-1] }} 
+  remote_user: "{{ user }}"   
   tasks:
     - name: Set sysctl
       command: sudo sysctl -w vm.max_map_count=262144
