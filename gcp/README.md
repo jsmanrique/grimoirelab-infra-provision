@@ -4,7 +4,7 @@ We will be working with [Google Cloud Compute (GCP) Container-Optimized OS (COS)
 
 Things you need to do:
 * [Create a Google Cloud Platform project](https://cloud.google.com/resource-manager/docs/creating-managing-projects), and take note of its ID.
-* [Download your credentials .json file into `grimoirelab-infra-provision/gcp`](https://cloud.google.com/docs/authentication/end-user#creating_your_client_credentials)
+* [Download your credentials .json file](https://cloud.google.com/docs/authentication/end-user#creating_your_client_credentials) into `grimoirelab-infra-provision/gcp`
 * [Add your SSH key to your account](https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys)
 
 # Setting your local environment and getting remote machinery ready
