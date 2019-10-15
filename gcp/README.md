@@ -1,5 +1,7 @@
 # Setting up Google Cloud Platform account
 
+We will be working with [Google Cloud Compute (GCP) Container-Optimized OS (COS) instances](https://cloud.google.com/container-optimized-os/).
+
 Things you need to do:
 * [Create a Google Cloud Platform project](https://cloud.google.com/resource-manager/docs/creating-managing-projects), and take note of its ID.
 * [Download your credentials .json file into `grimoirelab-infra-provision/gcp`](https://cloud.google.com/docs/authentication/end-user#creating_your_client_credentials)
@@ -23,7 +25,7 @@ gcp_project_name = "<GCP_PROJECT_ID>"
 terraform init
 ```
 
-4. Let's create your first droplet. It will read both your `terraform.tfvars` and `provision.tf` files.
+4. Let's create your first GCP COS Virtual Machine. It will read both your `terraform.tfvars` and `provision.tf` files.
 ```
 terraform apply -var name=<GIVE_IT_A_NAME>
 ```
