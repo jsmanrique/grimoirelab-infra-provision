@@ -15,13 +15,13 @@
       command: docker-compose down
       args:
         chdir: "{{ dest_path }}"
-      when: not gcp_cos
+      when: ansible_os_family != "Container-Optimized OS"
     
     - name: Set down GrimoireLab containers in GCP Containers Optimized instance
       command: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v {{ dest_path }}:{{ dest_path }} -w={{ dest_path }} docker/compose:1.24.1 down
       args:
         chdir: "{{ dest_path }}"
-      when: gcp_cos
+      when: ansible_os_family == "Container-Optimized OS"
 
     - import_tasks: upload-settings.yml
 
@@ -30,14 +30,14 @@
       args:
         chdir: "{{ dest_path }}"
       register: output
-      when: not gcp_cos
+      when: ansible_os_family != "Container-Optimized OS"
     
     - name: Start GrimoireLab containers in GCP Containers Optimized instance
       command: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v {{ dest_path }}:{{ dest_path }} -w={{ dest_path }} docker/compose:1.24.1 up -d
       args:
         chdir: "{{ dest_path }}"
       register: output
-      when: gcp_cos
+      when: ansible_os_family == "Container-Optimized OS"
     
     - debug:
         var: output
