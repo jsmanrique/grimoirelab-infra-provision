@@ -48,20 +48,15 @@ your needs.
 `setup.cfg` if you plan to gather data from GitHub, GitLab, or Meetup, for example.
 
 Once ready, execute `deploy.yml` playbook over the `public_ip`:
-* If your cloud infrastructure expects a `root` user and it's not a Google Cloud Virtual Machine Containers Optimized, then:
+* If your cloud infrastructure expects a `root` user, then run:
 ```
 cd ansible
 ansible-playbook -i <PUBLIC_IP>, deploy.yml
 ```
-* If your cloud infrastructure expects a `<USERNAME>` user and it's not a Google Cloud Virtual Machine Containers Optimized, then:
+* If your cloud infrastructure expects a `<USERNAME>` user, then run:
 ```
 cd ansible
 ansible-playbook -i <PUBLIC_IP>, deploy.yml -e "user=<USERNAME>"
-```
-* If your cloud infrastructure is a Google Cloud Containers Optimized Virtual Mahcine, it expects a `<USERNAME>` user, then:
-```
-cd ansible
-ansible-playbook -i <PUBLIC_IP>, deploy.yml -e "user=<USERNAME> gcp_cos=true"
 ```
 
 **IMPORTANT**: Don't forget the comma (`,`) after the `<PUBLIC_IP>`!
@@ -192,7 +187,7 @@ cd ansible
 ansible-playbook -i <PUBLIC_IP>, update.yml -e "update_orgs=false"
 ```
 
-**IMPORTANT**: Remember to add `user=<USERNAME>` or `gcp_cos=true` if needed to the `-e` parameter
+**IMPORTANT**: Remember to add `user=<USERNAME>` if needed to the `-e` parameter
 
 ### Update organizations
 
@@ -205,7 +200,7 @@ cd ansible
 ansible-playbook -i <PUBLIC_IP>, update.yml -e "update_settings=false"
 ```
 
-**IMPORTANT**: Remember to add `user=<USERNAME>` or `gcp_cos=true` if needed to the `-e` parameter
+**IMPORTANT**: Remember to add `user=<USERNAME>` if needed to the `-e` parameter
 
 ### Update all the settings
 
@@ -216,7 +211,7 @@ cd ansible
 ansible-playbook -i <PUBLIC_IP>, update.yml
 ```
 
-**IMPORTANT**: Remember to add `user=<USERNAME>` or `gcp_cos=true` if needed to the `-e` parameter
+**IMPORTANT**: Remember to add `user=<USERNAME>` if needed to the `-e` parameter
 
 ## Customize your GrimoireLab deployment
 
