@@ -93,8 +93,6 @@ resource "google_compute_instance" "demo" {
      }
  }
 
- metadata_startup_script = "sudo sysctl -w vm.max_map_count=262144"
-
 }
 
 output "public_ip" {
