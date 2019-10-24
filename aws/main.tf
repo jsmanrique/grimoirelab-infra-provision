@@ -2,14 +2,6 @@ variable "key_par_name" {
     default = "id_rsa"
 }
 
-variable "pub_key" {
-  default = "~/.ssh/id_rsa.pub"
-}
-
-variable "ssh_fingerprint" {
-  default = ""
-}
-
 variable "name" {
   default = "grimoirelab-demo"
 }
@@ -68,5 +60,5 @@ resource "aws_lightsail_instance" "grimoirelab_demo" {
 }
 
 output "public_ip" {
-  value = "${self.public_ip_address}"
+  value = "${aws_lightsail_instance.grimoirelab_demo.public_ip_address}"
 }
