@@ -2,13 +2,6 @@ variable "do_token" {
   description = "Digital Ocean personal token"
   default = ""
 }
-variable "pub_key" {
-  default = "~/.ssh/id_rsa.pub"
-}
-
-variable "pvt_key" {
-  default = "~/.ssh/id_rsa"
-}
 
 variable "ssh_fingerprint" {
   default = ""
@@ -39,8 +32,7 @@ resource "digitalocean_droplet" "demos" {
     inline = [
       "sudo apt update",
       "sudo apt update",
-      "sudo apt-get -y install python-minimal",
-      "sudo sysctl -w vm.max_map_count=262144",
+      "sudo apt-get -y install python-minimal"
     ]
 
     connection {
