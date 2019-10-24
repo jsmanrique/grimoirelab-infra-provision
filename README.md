@@ -26,6 +26,7 @@ More details, in the following sections. Let's have fun!
 or whatever mechanisms they provide. By now, this project has support for:
   * Digital Ocean
   * Google Cloud Platform
+  * Amazon Web Services
 
 # Step 1: Clone the repository and set up your cloud provider account
 
@@ -34,6 +35,7 @@ Clone it into your laptop / machine. I've only tested it in Linux, so I cannot p
 Setup your working environment based on your cloud provider:
 * [Digital Ocean](do/README.md)
 * [Google Cloud Platform](gcp/README.md)
+* [Amazon Web Services](aws/README.md)
 
 # Step 2: Deploy and manage GrimoireLab in your cloud infrastructure
 
