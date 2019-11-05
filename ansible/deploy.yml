@@ -10,6 +10,7 @@
         repo: "{{ grimoirelab_repo }}"
         dest: "{{ dest_path }}"
         track_submodules: true
+        force: yes
     
     - name: Set down running GrimoireLab containers
       command: docker-compose down
@@ -29,15 +30,15 @@
       command: docker-compose up -d
       args:
         chdir: "{{ dest_path }}"
-      register: output
+      # register: output
       when: ansible_os_family != "Container-Optimized OS"
     
     - name: Start GrimoireLab containers in GCP Containers Optimized instance
       command: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v {{ dest_path }}:{{ dest_path }} -w={{ dest_path }} docker/compose:1.24.1 up -d
       args:
         chdir: "{{ dest_path }}"
-      register: output
+      # register: output
       when: ansible_os_family == "Container-Optimized OS"
     
-    - debug:
-        var: output
+    # - debug:
+    #     var: output

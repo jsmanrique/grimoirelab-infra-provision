@@ -10,15 +10,15 @@
       command: docker-compose restart
       args:
         chdir: "{{ dest_path }}"
-      register: output
+      # register: output
       when: ansible_os_family != "Container-Optimized OS"
     
     - name: Restart containers in GCP COS VM
       command: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:$PWD" -w="$PWD" docker/compose:1.24.1 restart
       args:
         chdir: "{{ dest_path }}"
-      register: output
+      # register: output
       when: ansible_os_family == "Container-Optimized OS"
     
-    - debug:
-        var: output
+    # - debug:
+    #     var: output
