@@ -46,4 +46,11 @@ Outputs:
 public_ip = 157.245.85.159
 ```
 
+**Note**: It seems you cannot open `5601` port needed by Kibana using Terraform 
+([terraform-providers/terraform-provider-aws/issues/700](https://github.com/terraform-providers/terraform-provider-aws/issues/700)),
+so you'll need to open it using [your AWS Lightsail instances](https://lightsail.aws.amazon.com/ls/webapp/home)
+web interface:
+
+![Lightsail Firewall Management screenshot](lightsail-firewall-management-screenshot.jpg)
+
 You are ready for [next steps](../README.md#step-2-deploy-and-manage-grimoirelab-in-your-cloud-infrastructure)
