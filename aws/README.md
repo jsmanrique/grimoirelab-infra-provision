@@ -1,4 +1,4 @@
-# Setting up Digital Ocean account
+# Setting up AWS account
 
 We will be working with an [AWS Lightsail instance](https://aws.amazon.com/lightsail/).
 
